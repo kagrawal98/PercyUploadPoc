@@ -1,7 +1,7 @@
 {
     "deviceName": "OnePlus 8", 
     "os": "Android", 
-    "osVersion": "12",
+    "osVersion": "10",
     "deviceScreenSize": "1080x2400",
     "statusBarHeight": 104, 
     "navigationBarHeight": 229, 
