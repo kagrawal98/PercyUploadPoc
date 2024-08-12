@@ -8,6 +8,8 @@
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Button,
+  NativeModules,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -28,6 +30,8 @@ import {
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
+
+const {CustomModule} = NativeModules;
 
 function Section({children, title}: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -63,7 +67,7 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView testID="rootView" style={backgroundStyle}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
@@ -71,6 +75,37 @@ function App(): React.JSX.Element {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
+        <Button
+          testID="checkJSThreadBlock"
+          accessibilityLabel="checkJSThreadBlock"
+          onPress={() => {
+            console.log(
+              '-------------------Executing checkJSThreadBlock from JS------------------',
+            );
+            CustomModule.checkJSThreadBlock();
+            console.log('-------------------JS Choked------------------');
+          }}
+          title={'I will choke JS'}
+        />
+        <Button
+          testID="runAfterBlock"
+          accessibilityLabel="runAfterBlock"
+          onPress={() => {
+            console.log('I was running when JS choked');
+          }}
+          title={'I will check choked JS'}
+        />
+        {/* <Button
+          testID="checkJSThreadAsync"
+          onPress={() => {
+            console.log(
+              '-------------------Executing checkJSThreadAsync from JS------------------',
+            );
+            CustomModule.checkJSThreadAsync();
+            console.log('-------------------JS Choked------------------');
+          }}
+          title={'I will NOT Choke JS'}
+        /> */}
         <Header />
         <View
           style={{

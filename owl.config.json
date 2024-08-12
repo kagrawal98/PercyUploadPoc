@@ -1,0 +1,12 @@
+{
+    "ios": {
+      "workspace": "ios/OwlBasic.xcworkspace",
+      "scheme": "OwlBasic",
+      "configuration": "Release",
+      "device": "iPhone 15 Pro"
+    },
+    "android": {
+      "packageName": "com.owlbasic",
+      "buildType": "Release"
+    }
+  }
